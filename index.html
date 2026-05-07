@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OSS Kiosk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app-header">
+        <h1>OSS Kiosk</h1>
+        <button id="theme-toggle" class="theme-toggle" type="button">Dark mode</button>
+      </header>
+
+      <section aria-labelledby="products-title" class="panel">
+        <div class="panel-head">
+          <h2 id="products-title">Varer</h2>
+        </div>
+        <div id="product-grid" class="product-grid"></div>
+      </section>
+
+      <section aria-labelledby="cart-title" class="panel">
+        <div class="panel-head">
+          <h2 id="cart-title">Indkøbskurv</h2>
+        </div>
+        <div class="cart-wrap">
+          <table class="cart-table" aria-live="polite">
+            <thead>
+              <tr>
+                <th>Vare</th>
+                <th>Antal</th>
+                <th>Pris/stk</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="cart-body"></tbody>
+          </table>
+        </div>
+        <div class="cart-footer">
+          <div class="total-row">
+            <span>Samlet total</span>
+            <strong id="grand-total">0,00 kr</strong>
+          </div>
+          <div id="total-savings-row" class="total-row savings-row" hidden>
+            <span>Du sparer</span>
+            <strong id="total-savings">0,00 kr</strong>
+          </div>
+          <button id="checkout-btn" class="checkout-btn" type="button">Betaling</button>
+          <button id="rep-checkout-btn" class="rep-checkout-btn" type="button">
+            Repræsentant betaling
+          </button>
+          <p id="checkout-msg" class="checkout-msg" hidden></p>
+        </div>
+      </section>
+
+      <details id="product-admin-drawer" class="panel settings-drawer">
+        <summary>Varer & priser</summary>
+        <div class="settings-panel">
+          <div id="product-admin-list" class="product-admin-list"></div>
+          <div class="settings-row product-create-row">
+            <input id="new-product-name" class="settings-input" type="text" placeholder="Ny vare (navn)" />
+            <input
+              id="new-product-stock"
+              class="settings-input"
+              type="number"
+              step="1"
+              min="0"
+              placeholder="Tilbage"
+            />
+            <input
+              id="new-product-price"
+              class="settings-input"
+              type="number"
+              step="0.01"
+              min="0"
+              placeholder="Pris"
+            />
+            <input
+              id="new-product-offers"
+              class="settings-input"
+              type="text"
+              placeholder="Rabat fx 3=12,5=15"
+            />
+            <button id="add-product-btn" class="save-btn" type="button">Opret vare</button>
+          </div>
+          <p class="settings-hint">Rabatformat: `antal=pris`, adskil med komma. Eksempel: `3=12,5=15`</p>
+          <p id="product-admin-msg" class="status-message" hidden></p>
+        </div>
+      </details>
+
+      <details id="sales-drawer" class="panel settings-drawer">
+        <summary>Salgsoverblik</summary>
+        <div class="settings-panel">
+          <div class="sales-summary">
+            <div>
+              <span>Salg i alt</span>
+              <strong id="sales-count">0</strong>
+            </div>
+            <div>
+              <span>Omsætning</span>
+              <strong id="sales-total">0,00 kr</strong>
+            </div>
+            <div>
+              <span>Repræsentant</span>
+              <strong id="rep-total">0,00 kr</strong>
+            </div>
+            <div>
+              <span>Varer solgt</span>
+              <strong id="items-total">0</strong>
+            </div>
+          </div>
+          <div class="sales-toolbar">
+            <button id="export-sales-btn" class="save-btn" type="button">Eksporter til Excel</button>
+            <button id="clear-sales-btn" class="product-admin-delete" type="button">Ryd salg</button>
+          </div>
+          <div id="sales-list" class="sales-list"></div>
+        </div>
+      </details>
+    </main>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
